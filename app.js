@@ -18,6 +18,7 @@ const flash =require("connect-flash");
 const passport = require("passport");
 const LocalStrategy= require("passport-local");
 const User = require("./models/user.js");
+const Listing = require("./models/Listing.js");
 
 
 const port = 3000;
@@ -87,7 +88,7 @@ app.use("/bookings",bookingRoute);
 
 
 async function main(){
-    
+
     await mongoose.connect(process.env.ATLASDB_URL);
 
 }
@@ -100,10 +101,16 @@ main().then((res)=>{
 
 
 
-// app.get("/",(req,res)=>{
-//     console.log(req.flash("success"));
-//     res.send("welcome")
-// })
+app.get("/", async (req, res, next) => {
+    try {
+      const allListings = await Listing.find({});
+      res.render("listings/index", { allListings });
+    } catch (err) {
+      next(err); // passes the error to your error-handling middleware
+    }
+  });
+  
+  
 
 app.get("*",(req,res,next)=>{
    next(new ExpressError(404,"Page Not Found"));
