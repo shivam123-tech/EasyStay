@@ -1,0 +1,28 @@
+<% layout("/layouts/boilerplates") %>
+
+<body class="bg-light">
+  <div class="container mt-5 mb-5 d-flex justify-content-center align-items-center">
+    <div class="card shadow-lg p-4 rounded-4" style="max-width: 600px; width: 100%;">
+      <div class="card-body text-center " id="pdf-content">
+        <div class="mb-4">
+          <i class="bi bi-check-circle-fill text-success" style="font-size: 3rem;"></i>
+          <h2 class="text-success mt-3">Booking Confirmed!</h2>
+          <p class="text-muted">Thank you for your booking. Here are your booking details:</p>
+        </div>
+        <ul class="list-group list-group-flush mb-4 text-start">
+          <li class="list-group-item"><strong>Booking ID:</strong> <%= booking._id %></li>
+          <li class="list-group-item"><strong>Listing:</strong> <%= booking.listing.title %></li>
+          <li class="list-group-item"><strong>Check-in:</strong> <%= booking.checkIn.toDateString() %></li>
+          <li class="list-group-item"><strong>Check-out:</strong> <%= booking.checkOut.toDateString() %></li>
+          <li class="list-group-item"><strong>Guests:</strong> <%= booking.guests %></li>
+        </ul>
+      </div>
+  
+      <!-- Buttons outside of #pdf-content -->
+      <div class="d-flex justify-content-center gap-3 mt-3">
+        <a href="/listings" class="btn btn-dark px-4 py-2 rounded-pill">Back to Listings</a>
+        <button onclick="downloadPDF()" class="btn download-btn px-4 py-2 rounded-pill">Download PDF</button>
+      </div>
+    </div>
+  </div>
+</body>

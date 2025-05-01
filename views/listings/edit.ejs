@@ -1,0 +1,108 @@
+<% layout("/layouts/boilerplates")  %>
+<body>
+    <div class="row">
+        <div class="col-8 offset-2">
+           <br>
+    <h3>Edit your Listing</h3>
+    <form method="POST" action="/listings/<%= list.id  %>?_method=PUT"
+         novalidate class="needs-validation" enctype="multipart/form-data">
+        <div>
+            <label for="title" class="form-label">Title</label>
+            <input 
+                type="text" 
+                name="listing[title]" 
+                value="<%=list.title  %>" 
+                class="form-control" 
+                placeholder="Enter title" required>
+                <div class="valid-feedback">Title Looks good</div>
+                <div class="invalid-feedback">Please Enter Valid Title</div>
+        </div>
+        <br />
+
+        <div>
+            <label for="description" class="form-label">Description</label>
+            <textarea 
+                name="listing[description]" 
+                class="form-control" 
+                placeholder="Enter description" required><%= list.description %></textarea>
+                <div class="invalid-feedback">Please Enter a short description</div>
+        </div>
+        <br />
+     
+
+        <div>
+            <label for="category" class="form-label">Category</label>
+            <select name="listing[category]" class="form-select" required>
+                <option value="Trending" <%= list.category === 'Trending' ? 'selected' : '' %>>Trending</option>
+                <option value="Rooms" <%= list.category === 'Rooms' ? 'selected' : '' %>>Rooms</option>
+                <option value="Top cities" <%= list.category === 'Top cities' ? 'selected' : '' %>>Top cities</option>
+                <option value="Islands" <%= list.category === 'Islands' ? 'selected' : '' %>>Islands</option>
+                <option value="Beach" <%= list.category === 'Beach' ? 'selected' : '' %>>Beach</option>
+                <option value="Amazing Pools" <%= list.category === 'Amazing Pools' ? 'selected' : '' %>>Amazing Pools</option>
+                <option value="Camping" <%= list.category === 'Camping' ? 'selected' : '' %>>Camping</option>
+                <option value="Farms" <%= list.category === 'Farms' ? 'selected' : '' %>>Farms</option>
+                <option value="Desert" <%= list.category === 'Desert' ? 'selected' : '' %>>Desert</option>
+                <option value="Tropical" <%= list.category === 'Tropical' ? 'selected' : '' %>>Tropical</option>
+            </select>
+            <div class="invalid-feedback">Please select a valid category</div>
+        </div>
+
+        <br />
+
+        <div class="mb-3">
+         Original Listing Image <br>
+         <img src="<%= originalImageUrl %>"/>
+        </div>
+
+        <div>
+            <label for="imageurl" class="form-label">Upload New Image</label>
+            <input 
+                type="file" 
+                name="listing[image][url]" 
+                class="form-control" 
+                >
+        </div>
+        <br />
+
+        <div>
+            <label for="price" class="form-label">Price</label>
+            <input 
+                type="number" 
+                name="listing[price]" 
+                value="<%= list.price  %>" 
+                class="form-control" 
+                placeholder="Enter price" required>
+                <div class="invalid-feedback">Price should be valid</div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-md-8">
+                <label for="location" class="form-label">Location</label>
+                <input 
+                    type="text" 
+                    name="listing[location]" 
+                    value="<%=list.location  %>" 
+                    class="form-control" 
+                    placeholder="Enter location" required>
+                <br />
+                <div class="invalid-feedback">Location should be valid</div>
+            </div>
+
+            <div class="col-md-4">
+                <label for="country" class="form-label">Country</label>
+                <input 
+                    type="text" 
+                    name="listing[country]" 
+                    value="<%= list.country  %>" 
+                    class="form-control" 
+                    placeholder="Enter country" required>
+                    <div class="invalid-feedback">Country should be valid</div>
+            </div>
+        </div>
+        <button class="btn btn-dark edit-btn">Edit</button>
+        <br /><br />
+    </form>
+</div>
+</div>
+</body>
