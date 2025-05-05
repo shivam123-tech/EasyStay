@@ -1,0 +1,52 @@
+<% layout("/layouts/boilerplates") %>
+<body>
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-sm-10">
+        <div class="card shadow-lg p-4 rounded-4">
+          <h2 class="text-center mb-4">Book: <%= listing.title %></h2>
+
+          <form action="/bookings/<%= listing._id %>/book" method="POST" class="needs-validation" novalidate>
+
+             <!-- Hidden listing,user ID for use of which lisiting book by which user-->
+             <input type="hidden" name="booking[listing]" value="<%= listing._id %>">
+             <input type="hidden" name="booking[user]" value="<%= user._id %>">
+            
+            <!-- Check-in Date -->
+            <div class="mb-3">
+              <label for="checkIn" class="form-label">Check-in Date</label>
+              <input type="date" id="checkIn" name="booking[checkIn]" class="form-control" required>
+              <div class="invalid-feedback">Please choose a valid check-in date.</div>
+            </div>
+
+            <!-- Check-out Date -->
+            <div class="mb-3">
+              <label for="checkOut" class="form-label">Check-out Date</label>
+              <input type="date" id="checkOut" name="booking[checkOut]" class="form-control" required>
+              <div class="invalid-feedback">Please choose a valid check-out date.</div>
+            </div>
+
+            <!-- Number of Guests -->
+            <div class="mb-3">
+              <label for="guests" class="form-label">Number of Guests</label>
+              <input type="number" id="guests" name="booking[guests]" class="form-control" min="1" max="10" required>
+              <div class="invalid-feedback">Please enter a valid number of guests</div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid">
+              <button type="submit" class="btn btn-dark book-btn">Confirm Booking</button>
+            </div>
+          </form>
+
+
+
+          <div class="mt-3 text-center">
+           <b><a href="/listings/<%= listing._id %>" class="text-decoration-none text-dark" >Back to Listing</a></b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
